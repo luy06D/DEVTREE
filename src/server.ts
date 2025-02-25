@@ -1,7 +1,7 @@
 // SEPARAMOS PARA LLEVAR TODA LA CONFIGURACION DEL SERVIDOR 
 import express from 'express';
 import router from './router';
-import { connectDB } from './config/DataBase';
+import { connectDB } from './config/database';
 
 const app = express();
 
