@@ -13,9 +13,6 @@ export const createUsers = async (req: Request , res: Response )  =>{
          res.status(400).json({errors: errors.array()})
          return;
     }
-    return
-
-
 
     const {email, password} = req.body;
 
@@ -40,4 +37,13 @@ export const createUsers = async (req: Request , res: Response )  =>{
     await user.save()
     res.status(201).send('Registrado con exito')
 
+}
+
+export const login = async (req: Request, res: Response) => {
+    
+    let errors = validationResult(req);
+    if(!errors.isEmpty()){
+         res.status(400).json({errors: errors.array()})
+         return;
+    }
 }
