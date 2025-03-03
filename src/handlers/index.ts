@@ -2,10 +2,20 @@ import {Request, Response} from 'express'
 import User from "../models/User"
 import { hashPassword } from '../utils/auth';
 import slug from 'slug'
+import { validationResult } from 'express-validator';
 
 // REQ ES LO QUE EL USUARIO ENVIA
 // RES LA RESPUESTA DEL SERVIDOR 
 export const createUsers = async (req: Request , res: Response )  =>{
+
+    let errors = validationResult(req);
+    if(!errors.isEmpty()){
+         res.status(400).json({errors: errors.array()})
+         return;
+    }
+    return
+
+
 
     const {email, password} = req.body;
 
