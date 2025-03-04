@@ -1,6 +1,7 @@
 import {Request, Response} from 'express'
 import User from "../models/User"
 import { hashPassword } from '../utils/auth';
+import { checkPassword } from '../utils/auth';
 import slug from 'slug'
 import { validationResult } from 'express-validator';
 
@@ -46,4 +47,35 @@ export const login = async (req: Request, res: Response) => {
          res.status(400).json({errors: errors.array()})
          return;
     }
+
+    // VERIFICAMOS SI EL USUARIOS EXISTE 
+
+    const {email, password} = req.body;
+
+    const user = await User.findOne({email}) 
+    if(!user){
+        const error = new Error('El usuario no existe')    
+        res.status(404).json({error: error.message})
+        return;
+    }
+
+    // VALIDAMOS EL PASSWORD
+    const authenticationPass = await checkPassword(password, user.password);
+
+    if(!authenticationPass){
+        const error = new Error('La contraseña es incorrecta')
+        res.status(409).json({error: error.message})
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 }
