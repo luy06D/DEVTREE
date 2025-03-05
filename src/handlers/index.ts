@@ -9,11 +9,6 @@ import { validationResult } from 'express-validator';
 // RES LA RESPUESTA DEL SERVIDOR 
 export const createUsers = async (req: Request , res: Response )  =>{
 
-    let errors = validationResult(req);
-    if(!errors.isEmpty()){
-         res.status(400).json({errors: errors.array()})
-         return;
-    }
 
     const {email, password} = req.body;
 
@@ -42,11 +37,6 @@ export const createUsers = async (req: Request , res: Response )  =>{
 
 export const login = async (req: Request, res: Response) => {
     
-    let errors = validationResult(req);
-    if(!errors.isEmpty()){
-         res.status(400).json({errors: errors.array()})
-         return;
-    }
 
     // VERIFICAMOS SI EL USUARIOS EXISTE 
 
