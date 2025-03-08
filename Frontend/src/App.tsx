@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
@@ -13,7 +11,7 @@ function App() {
     <h1 className='font-black text-6xl bg-orange-700'>{letra}</h1>
     
     </>
-  )
+  ) 
 }
 
 export default App
