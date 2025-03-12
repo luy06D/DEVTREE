@@ -1,6 +1,9 @@
 
-export default function loginViews() {
+
+function LoginViews() {
   return (
     <div>loginViews</div>
   )
 }
+
+export default LoginViews

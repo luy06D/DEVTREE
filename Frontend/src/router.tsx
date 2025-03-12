@@ -1,18 +1,12 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import LoginViews from './views/loginViews'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import LoginViews from './views/LoginViews';
 
-
-export default function Router(){
-    return(
-        <BrowserRouter>
-            <Routes>
-                <Route>
-                    <Route path='/auth/login' element={<LoginViews/>}/>
-
-                </Route>
-            </Routes>
-        </BrowserRouter>
-
-
-    )
-}   
+export default function Router() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/auth/login" element={<LoginViews />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
