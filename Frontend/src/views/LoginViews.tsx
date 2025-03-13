@@ -1,9 +1,16 @@
 
+import { Link } from "react-router-dom"
 
-function LoginViews() {
+export default function loginViews() {
   return (
-    <div>loginViews</div>
+    <>
+  
+
+    <Link to="/auth/register">
+    ¿No tienes una cuenta registrate ahora?
+    </Link>
+    
+    
+    </>
   )
 }
-
-export default LoginViews
