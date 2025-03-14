@@ -4,10 +4,19 @@ import { Link } from "react-router-dom"
 export default function RegisterViews() {
   return (
     <>
-    <Link to="/auth/login">
-    Inicia sesión en LDcode
-    </Link>
-    
+
+    <h1 className="text-4xl text-center text-white font-bold" >Crear Cuenta</h1>
+
+    <nav className="mt-10">
+
+      <Link 
+      className="text-center text-white text-lg block"
+      to="/auth/login"
+      >Inicia sesión en LDcode
+      </Link>
+      
+    </nav>
+
     </>
   )
 }

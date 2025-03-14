@@ -1,4 +1,4 @@
-
+import { Outlet } from "react-router-dom"
 
 export default function AuthLayouts() {
   return (
@@ -8,7 +8,7 @@ export default function AuthLayouts() {
           <img src="/logo.svg" alt="Logotipo" />
 
           <div className="py-10">
-            <h1 className="text-white">prueba</h1>
+            <Outlet/>
           </div>
         </div>
       </div>
