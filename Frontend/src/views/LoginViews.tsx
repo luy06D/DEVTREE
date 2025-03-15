@@ -1,11 +1,15 @@
 
 import { Link } from "react-router-dom"
+import {useForm} from 'react-hook-form'
+
 
 export default function loginViews() {
+
+
   return (
     <>
 
-      <h1 className="text-4xl text-center text-white font-bold" >Inicia Sesióna</h1>
+      <h1 className="text-4xl text-center text-white font-bold" >Inicia Sesión</h1>
       <nav className="mt-10">
         
         <Link
