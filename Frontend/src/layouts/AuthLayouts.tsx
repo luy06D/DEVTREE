@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom"
+import { Toaster } from "sonner"
 
 export default function AuthLayouts() {
   return (
@@ -13,7 +14,9 @@ export default function AuthLayouts() {
         </div>
       </div>
     
-    
+      <Toaster 
+      position='top-right'
+      richColors />
     </>
   )
 }
