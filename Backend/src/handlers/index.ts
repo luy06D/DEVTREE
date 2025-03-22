@@ -55,7 +55,10 @@ export const login = async (req: Request, res: Response) => {
     if(!authenticationPass){
         const error = new Error('La contraseña es incorrecta')
         res.status(409).json({error: error.message})
+        return;
     }
+
+    res.send('El diabloooo')
 
 
 
