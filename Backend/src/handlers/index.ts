@@ -4,6 +4,7 @@ import { hashPassword } from '../utils/auth';
 import { checkPassword } from '../utils/auth';
 import slug from 'slug'
 import { validationResult } from 'express-validator';
+import { generateJWT } from '../utils/jwt';
 
 // REQ ES LO QUE EL USUARIO ENVIA
 // RES LA RESPUESTA DEL SERVIDOR 
@@ -46,7 +47,7 @@ export const login = async (req: Request, res: Response) => {
     if(!user){
         const error = new Error('El usuario no existe')    
         res.status(404).json({error: error.message})
-        return;
+        return; 
     }
 
     // VALIDAMOS EL PASSWORD
@@ -58,7 +59,9 @@ export const login = async (req: Request, res: Response) => {
         return;
     }
 
-    res.send('El diabloooo')
+    const token = generateJWT({id : user._id});
+
+    res.send('autooooo')
 
 
 
