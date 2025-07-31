@@ -4,7 +4,9 @@
   "description": "Primer proyecto con Express y TypeScript",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "build" : "tsc",
+    "start": "node dist/index.js"
   },
   "author": "Luis David Cusi Gonzales @LDcode",
   "license": "ISC",
