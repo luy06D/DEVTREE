@@ -9,7 +9,7 @@ app.get('/', (req, res) =>{
 })
 
 app.get('/pagina2', (req, res) =>{
-     res.send('Hola soy pagina 2 ')
+     res.send('Hola soy pagina 2')
 })
 
 // Se cambiara cuando tenga un archivo con las variables de entorno
