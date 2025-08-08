@@ -7,8 +7,10 @@ import { connectDB } from './config/database';
 const app = express()
 
 connectDB()
-// CONFIGURACION DEL SERVIDOR 
 
+// Leer datos de formularios
+app.use(express.json())
+// CONFIGURACION DEL SERVIDOR 
 app.use("/", router);
 
 

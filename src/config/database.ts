@@ -6,6 +6,7 @@ export const connectDB = async () => {
         const {connection} = await mongoose.connect(process.env.MONGO_URL)
         const url = `${connection.host}: ${connection.port}`
         console.log(`MongoDB conectado en ${url}`)
+        console.log(process.env.MONGO_URL)
         
     } catch (error) {
         console.log(error.message)
