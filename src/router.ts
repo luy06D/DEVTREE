@@ -1,14 +1,11 @@
 import { Router } from "express";
-import User from "./models/User";
+import { createAccount } from "./handlers";
 const router = Router();
 
 // Routing -- CREAMOS LAS RUTAS DE LA APLICACIÓN
 
 /** Autenticación y Registro */
-router.post('/auth/register', async (req, res) =>{
-     await User.create(req.body)
-     
-})
+router.post('/auth/register', createAccount);
 
 
 
