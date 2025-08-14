@@ -1,13 +1,14 @@
 import { Router } from "express";
-import { createAccount } from "./handlers";
+import { createAccount, login } from "./handlers";
 import { body } from 'express-validator'
+import { handleInputErrors } from "./middleware/validation";
 
 
 const router = Router();
 
 // Routing -- CREAMOS LAS RUTAS DE LA APLICACIÓN
 
-/** Autenticación y Registro */
+/**  Registro y validación */
 router.post('/auth/register',
     body('handle')
         .notEmpty()
@@ -22,8 +23,19 @@ router.post('/auth/register',
         .isLength({min: 8})
         .notEmpty()
         .withMessage('La contraseña debe tener como minimo 8 caracteres'),
-
+    handleInputErrors,
     createAccount);
+
+/** Autenticacion de usuario */
+router.post('/auth/login',
+    body('email')
+        .isEmail()
+        .withMessage('El email no puede ir vacio'),
+    body('password')
+        .notEmpty()
+        .withMessage('El password es obligatorio'),
+    handleInputErrors,
+    login);
 
 
 
