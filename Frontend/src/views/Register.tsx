@@ -17,7 +17,7 @@ export default function Register() {
     password_confirmation : ''
 
   }
-
+  
   const {register, watch, reset, handleSubmit, formState: {errors}} = useForm({defaultValues: initialValues})
 
   const password = watch("password"); // Almacena el value del password
