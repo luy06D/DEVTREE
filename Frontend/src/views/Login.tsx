@@ -1,19 +1,32 @@
 import { Link } from "react-router-dom"
 import { useForm } from 'react-hook-form'
 import ErrorMessage from "../components/ErrorMessage"
-import {toast} from 'sonner'
+import { toast } from 'sonner'
+import type { LoginForm } from "../types"
+import api from "../config/axios"
+import { isAxiosError } from "axios"
 
 export default function Login() {
 
-  const initialValues = {
+  const initialValues: LoginForm = {
     email: '',
     password: ''
   }
 
-  const { register, watch, handleSubmit, formState: { errors } } = useForm({ defaultValues: initialValues })
+  const { register, reset, handleSubmit, formState: { errors } } = useForm({ defaultValues: initialValues })
 
-  const handleLogin = () =>{
-      toast.success("gaaaaaaaaaaaaaaaaaaa")
+  const handleLogin = async (formData: LoginForm) => {
+    try {
+      const { data } = await api.post(`/auth/login`, formData)
+      toast.success(data)
+      reset() // Limpia el formulario
+
+    } catch (error) {
+      if (isAxiosError(error) && error.response) {
+        toast.error(error.response.data.error);
+
+      }
+    }
   }
   return (
     <>

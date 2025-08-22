@@ -2,6 +2,7 @@ import {Request, Response} from 'express'
 import User from "../models/User"
 import {hashPassword, checkPassword} from "../utils/auth"
 import slug from 'slug'
+import { generateJWT } from '../utils/jwt'
 
 
 // USER REGISTER 
@@ -57,6 +58,8 @@ export const login = async (req: Request, res: Response) => {
         const error = new Error('La contraseña es incorrecta')
         return res.status(401).json({error: error.message})
     }
+
+    generateJWT(user)
 
     res.send("Autenticando.....")
 
