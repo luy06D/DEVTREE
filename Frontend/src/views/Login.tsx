@@ -18,8 +18,7 @@ export default function Login() {
   const handleLogin = async (formData: LoginForm) => {
     try {
       const { data } = await api.post(`/auth/login`, formData)
-      toast.success(data)
-      reset() // Limpia el formulario
+      localStorage.setItem('AUTH_TOKEN', data)
 
     } catch (error) {
       if (isAxiosError(error) && error.response) {
