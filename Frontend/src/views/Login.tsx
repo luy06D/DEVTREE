@@ -13,7 +13,7 @@ export default function Login() {
     password: ''
   }
 
-  const { register, reset, handleSubmit, formState: { errors } } = useForm({ defaultValues: initialValues })
+  const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: initialValues })
 
   const handleLogin = async (formData: LoginForm) => {
     try {
