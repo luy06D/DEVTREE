@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import { getUser } from "../api/DevTreeAPI";
 import DevTree from "../components/DevTree";
 
+
 export default function AppLayout() {
 
     const { data, isLoading, isError } = useQuery({
@@ -17,6 +18,7 @@ export default function AppLayout() {
 
     // RENDERIZA LA VISTA DE INICIO
     if (data) return <DevTree data={data}/>
+
 
 
 
