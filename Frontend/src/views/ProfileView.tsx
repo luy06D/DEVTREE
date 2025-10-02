@@ -1,21 +1,27 @@
 import {useForm} from 'react-hook-form'
 import ErrorMessage from '../components/ErrorMessage'
+import { useQueryClient } from "@tanstack/react-query";
+import type { User, ProfileForm } from '../types';
 
 
 
 export default function ProfileView() {
 
+    const queryClient = useQueryClient();
+    // Para obtener los datos que estan en cache.
+    const data : User = queryClient.getQueryData(['user'])!
+
+
+    console.log(data)
 
     const {register, handleSubmit, formState: {errors} } = useForm({ defaultValues: {
-
-        handle: '',
-        description: '',
-
+        handle: data.handle,
+        descripcion: data.descripcion
     }})
-    
+
     // GUARDA LA DATA DEL FORMULARIO....
 
-    const saveForm = (formData) =>{
+    const handleSaveForm = (formData: ProfileForm ) =>{
         console.log(formData)
     }
     
@@ -23,7 +29,7 @@ export default function ProfileView() {
     return (
         <form 
             className="bg-white p-10 rounded-lg space-y-5"
-            onSubmit={handleSubmit(saveForm)}
+            onSubmit={handleSubmit(handleSaveForm)}
         >
             <legend className="text-2xl text-slate-800 text-center">Editar Información</legend>
             <div className="grid grid-cols-1 gap-2">
@@ -45,17 +51,17 @@ export default function ProfileView() {
 
             <div className="grid grid-cols-1 gap-2">
                 <label
-                    htmlFor="description"
+                    htmlFor="descripcion"
                 >Descripción:</label>
                 <textarea
                     className="border-none bg-slate-100 rounded-lg p-2"
                     placeholder="Tu Descripción"
-                    {...register('description', {
+                    {...register('descripcion', {
                         required: "La descripción es obligatoria"
                     })}
                 />
 
-                {errors.description && <ErrorMessage>{errors.description.message}</ErrorMessage>}
+                {errors.descripcion && <ErrorMessage>{errors.descripcion.message}</ErrorMessage>}
             </div>
 
             <div className="grid grid-cols-1 gap-2">
