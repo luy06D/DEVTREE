@@ -75,12 +75,13 @@ export const getUser = async (req: Request, res: Response) => {
 // UPDATE INFORMATION - USER
 export const updateUser = async (req: Request, res: Response) => {
     try {
-
+        // Extraemos descripcion del body...
         const { descripcion } = req.body
 
         const handle = slug(req.body.handle)
         const handleExists = await User.findOne({ handle })
 
+        // Si existe el handle y el email es distinto.
         if (handleExists && handleExists.email !== req.user.email) {
             const error = new Error('El handle ya esta registrado')
             return res.status(409).json({ error: error.message })

@@ -48,7 +48,7 @@ const DevTree = ({data} : DevTreeProts) => {
                     </div>
                 </main>
             </div>
-            <Toaster position="top-right" />
+            <Toaster position="top-right" richColors />
         </>
   )
 }
