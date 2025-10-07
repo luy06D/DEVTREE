@@ -1,12 +1,13 @@
 import mongoose, { Schema , Document} from "mongoose";
-
+// libreria node.js - mongoose ODM  para crear estructura de mongoDB
 
 export interface IUser extends Document {
     handle: string,
     name: string,
     email: string,
     password: string,
-    descripcion: string
+    descripcion: string,
+    image: string
 
 }
 
@@ -42,6 +43,11 @@ const userSchema = new Schema({
         require: true,
         trim: true
 
+    },
+    
+    image: {
+        type: String,
+        default: ''
     }
 })
 

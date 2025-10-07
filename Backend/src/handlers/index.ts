@@ -1,6 +1,8 @@
 import { Request, Response } from 'express'
 import User from "../models/User"
 import { hashPassword, checkPassword } from "../utils/auth"
+import formidable from 'formidable'
+import cloudinary from '../config/cloudinary'
 import slug from 'slug'
 import { generateJWT } from '../utils/jwt'
 
@@ -95,6 +97,38 @@ export const updateUser = async (req: Request, res: Response) => {
 
     } catch (err) {
         const error = new Error('Error al actualizar')
+        return res.status(500).json({ error: error.message })
+
+    }
+}
+
+export const uploadImage = async (req: Request, res: Response) => {
+
+    const form = formidable({ multiples: false })
+
+    try {
+        form.parse(req, (error, fields, files) => {
+
+            const url_img = files.file[0].filepath // Ruta -- direccion de imagen en cloudinary
+            cloudinary.uploader.upload(url_img, {}, async function (error, result) {
+                if(error){
+                    const error = new Error('Error al subir la imagen')
+                    return res.status(500).json({error: error.message})
+                }
+
+                if(result){
+                    req.user.image = result.secure_url
+                    await req.user.save()
+                    res.json({imagen: result.secure_url}) // repuesta json - url img
+                }
+                
+
+            })
+        })
+
+
+    } catch (err) {
+        const error = new Error('Error al cargar la imagen')
         return res.status(500).json({ error: error.message })
 
     }
