@@ -5,6 +5,7 @@ export type User = {
     email : string
     _id: string
     descripcion: string
+    image : string
 }
 
 // HEREDAN DE USER 

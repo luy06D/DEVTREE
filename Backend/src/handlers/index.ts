@@ -102,6 +102,7 @@ export const updateUser = async (req: Request, res: Response) => {
     }
 }
 
+// UPLOAD IMAGE - USER 
 export const uploadImage = async (req: Request, res: Response) => {
 
     const form = formidable({ multiples: false })
