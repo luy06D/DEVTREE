@@ -45,11 +45,18 @@ export default function ProfileView() {
         mutationFn: uploadImage,
 
         onError: (error) => {
-           console.log(error)
+            toast.error(error.message)
         },
 
         onSuccess: (data) => {
             console.log(data)
+            queryClient.setQueryData(['user'], (prevData : User) =>{
+                    console.log(prevData)
+                return{
+                        ...prevData,
+                        image: data.imagen // imagen esta desde cloudinary 
+                    }
+            })
         }
     })
 
