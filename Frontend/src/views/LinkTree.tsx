@@ -6,7 +6,22 @@ export default function LinkTree() {
 
   const [devTreeLinks , setDevTreeLinks] =  useState(social);
 
-  console.log(devTreeLinks);
+  const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+    const updatedLinks = devTreeLinks.map(links => links.name === e.target.name ? {...links , url: e.target.value} :
+      links 
+    )
+    setDevTreeLinks(updatedLinks)
+    console.log(updatedLinks);
+  }
+
+  const handleEnableLinks = (socialNetwork : string) => {
+    const updateEnables = devTreeLinks.map(links => links.name === socialNetwork ? {...links , enabled: !links.enabled}:
+       links)
+    setDevTreeLinks(updateEnables)
+    console.log(updateEnables);
+    
+  }
 
 
   return (
@@ -15,6 +30,8 @@ export default function LinkTree() {
         <DevTreeInputs
         key={item.name}
         item={item}
+        handleUrlChange={handleUrlChange}
+        handleEnableLinks={handleEnableLinks}
         />
       ))}
 

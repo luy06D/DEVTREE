@@ -4,9 +4,11 @@ import { classNames } from '../utils';
 
 type DevTreeInputsProps = {
   item: DevTreeLinks
+  handleUrlChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  handleEnableLinks : (socialNetwork: string) => void
 }
 
-function DevTreeInputs({ item }: DevTreeInputsProps) {
+function DevTreeInputs({ item, handleUrlChange, handleEnableLinks }: DevTreeInputsProps) {
   return (
     <div className="bg-white shadow-sm p-5 flex items-center gap-3">
       <div
@@ -14,11 +16,15 @@ function DevTreeInputs({ item }: DevTreeInputsProps) {
         style={{ backgroundImage: `url('/social/icon_${item.name}.svg')` }}
       ></div>
       <input type="text"
-        // className="flex-1 border border-gray-400 rounded-lg"
+        className="flex-1 border border-gray-400 rounded"
+        value={item.url}
+        onChange={handleUrlChange}
+        name={item.name}
       />
       <Switch
         checked={item.enabled}
-        onChange={() => { }}
+        onChange={() => handleEnableLinks(item.name)}
+
         className={classNames(
           item.enabled ? 'bg-blue-500' : 'bg-gray-200',
           'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'
