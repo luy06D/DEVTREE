@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { social } from "../data/social"
 import DevTreeInputs from "../components/DevTreeInput";
+import { isValidateUrl } from "../utils";
+import { toast } from "sonner";
 
 export default function LinkTree() {
 
@@ -16,8 +18,19 @@ export default function LinkTree() {
   }
 
   const handleEnableLinks = (socialNetwork : string) => {
-    const updateEnables = devTreeLinks.map(links => links.name === socialNetwork ? {...links , enabled: !links.enabled}:
-       links)
+    const updateEnables = devTreeLinks.map(links => {
+      if(links.name === socialNetwork ){
+        if(isValidateUrl(links.url)){
+          return {...links , enabled: !links.enabled}
+        }else{
+          toast.error("Formato URL incorrecto")
+        }
+        
+      }
+      return links
+
+    }) 
+
     setDevTreeLinks(updateEnables)
     console.log(updateEnables);
     
