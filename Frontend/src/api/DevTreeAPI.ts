@@ -18,7 +18,7 @@ export async function getUser() {
     }
 }
 
-export async function updateUser(formData: ProfileForm) {
+export async function updateUser(formData: User) {
     try {
         // API : URL 
         const { data } = await api.patch<String>('/user', formData)

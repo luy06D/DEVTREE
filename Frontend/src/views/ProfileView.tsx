@@ -38,7 +38,10 @@ export default function ProfileView() {
 
     // GUARDA LA DATA DEL FORMULARIO....
     const handleSaveForm = (formData: ProfileForm ) =>{
-        updateProfileMutation.mutate(formData)
+        const user: User = queryClient.getQueryData(['user'])!
+        user.descripcion = formData.descripcion
+        user.handle = formData.handle
+        updateProfileMutation.mutate(user)
     }
 
         const uploadImageMutation = useMutation({

@@ -78,7 +78,7 @@ export const getUser = async (req: Request, res: Response) => {
 export const updateUser = async (req: Request, res: Response) => {
     try {
         // Extraemos descripcion del body...
-        const { descripcion } = req.body
+        const { descripcion, links } = req.body
 
         const handle = slug(req.body.handle)
         const handleExists = await User.findOne({ handle })
@@ -91,6 +91,7 @@ export const updateUser = async (req: Request, res: Response) => {
 
         req.user.descripcion = descripcion
         req.user.handle = handle
+        req.user.links = links
         await req.user.save()
         res.send("Los datos se actualizaron correctamente")
 
