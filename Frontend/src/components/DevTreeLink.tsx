@@ -12,9 +12,9 @@ const DevTreeLink = ({ link }: DevTreeLinkProps) => {
                 className="w-12 h-12 shadow-sm "
                 style={{ backgroundImage: `url('/social/icon_${link.name}.svg')` }}>
             </div>
-            <p className="capitalize"> Visita mi:
+            <p className="capitalize">Visita mi:
                 <span className="font-black">
-                    { link.name}
+                {" " + link.name}
                 </span>
             </p>
         </li>

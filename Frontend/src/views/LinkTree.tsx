@@ -13,7 +13,6 @@ export default function LinkTree() {
 
   const queryClient = useQueryClient();
   const user: User = queryClient.getQueryData(['user'])!
-  console.log(JSON.parse(user.links));
 
   const { mutate } = useMutation({
     mutationFn: updateUser,
@@ -38,24 +37,17 @@ export default function LinkTree() {
   }, [])
 
 
-
+  // ALMACENA LA URL DEL USUARIO EN EL STATE
   const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
     const updatedLinks = devTreeLinks.map(links => links.name === e.target.name ? { ...links, url: e.target.value } :
       links
     )
     setDevTreeLinks(updatedLinks)
-
-    // PODEMOS MEJORAR ESTO POR EL MOMENTO ESTARA ASI 
-        queryClient.setQueryData(['user'], (prevData: User) => {
-      return {
-        ...prevData,
-        links: JSON.stringify(updatedLinks)
-      }
-
-    })
   }
 
+  const links: SocialNetwork[] = JSON.parse(user.links)
+
+  //HABILITA LAS URLS VALIDAS 
   const handleEnableLinks = (socialNetwork: string) => {
     const updatedLinks = devTreeLinks.map(links => {
       if (links.name === socialNetwork) {
@@ -69,10 +61,31 @@ export default function LinkTree() {
     })
     setDevTreeLinks(updatedLinks)
 
+    
+    let updatedItems: SocialNetwork[] = []
+    const selectedSocialNetwork = updatedLinks.find(link => link.name === socialNetwork);
+    if(selectedSocialNetwork?.enabled){
+      console.log("Habilitado");
+      console.log(links.length);
+
+      const newItem = {
+        ...selectedSocialNetwork,
+        id: links.length + 1
+      }
+      updatedItems = [...links , newItem]
+    }else{
+      console.log("Desc");
+    }
+
+    console.log(updatedItems);
+    
+    
+
+    // Almacenar en base de datos..
     queryClient.setQueryData(['user'], (prevData: User) => {
       return {
         ...prevData,
-        links: JSON.stringify(updatedLinks)
+        links: JSON.stringify(updatedItems)
       }
 
     })
