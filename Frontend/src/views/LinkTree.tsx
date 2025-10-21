@@ -28,11 +28,11 @@ export default function LinkTree() {
   useEffect(() => {
     const updateData = devTreeLinks.map(item => {
       const userLinks = JSON.parse(user.links).find((link: SocialNetwork) => link.name === item.name)
-      if(userLinks){
-        return { ...item , url: userLinks.url, enabled: userLinks.enabled}
+      if (userLinks) {
+        return { ...item, url: userLinks.url, enabled: userLinks.enabled }
       }
       return item
-    }) 
+    })
     setDevTreeLinks(updateData)
   }, [])
 
@@ -49,6 +49,7 @@ export default function LinkTree() {
 
   //HABILITA LAS URLS VALIDAS 
   const handleEnableLinks = (socialNetwork: string) => {
+
     const updatedLinks = devTreeLinks.map(links => {
       if (links.name === socialNetwork) {
         if (isValidateUrl(links.url)) {
@@ -61,25 +62,58 @@ export default function LinkTree() {
     })
     setDevTreeLinks(updatedLinks)
 
-    
     let updatedItems: SocialNetwork[] = []
     const selectedSocialNetwork = updatedLinks.find(link => link.name === socialNetwork);
-    if(selectedSocialNetwork?.enabled){
-      console.log("Habilitado");
-      console.log(links.length);
 
-      const newItem = {
-        ...selectedSocialNetwork,
-        id: links.length + 1
+    if (selectedSocialNetwork?.enabled) {
+      const id = links.filter(link => link.id).length + 1
+
+      if (links.some(link => link.name === socialNetwork)) {
+        updatedItems = links.map(link => {
+          if (link.name === socialNetwork) {
+            return {
+              ...link,
+              enabled: true,
+              id
+            }
+          }else{
+            return link
+          }
+        })
+
+      } else {
+        const newItem = {
+          ...selectedSocialNetwork,
+          id
+        }
+        updatedItems = [...links, newItem]
+
       }
-      updatedItems = [...links , newItem]
-    }else{
-      console.log("Desc");
+    } else {
+      // Me da el indice de los links 
+      const indexToUpdate = links.findIndex(link => link.name === socialNetwork)
+
+      updatedItems = links.map(link => {
+        if (link.name === socialNetwork) {
+          return {
+            ...link,
+            id: 0,
+            enabled: false
+          }
+        } else if(link.id > indexToUpdate) {
+
+          return {
+            ...link,
+            id: link.id - 1
+          }
+        } else {
+          return link
+        }
+      })
+
     }
 
     console.log(updatedItems);
-    
-    
 
     // Almacenar en base de datos..
     queryClient.setQueryData(['user'], (prevData: User) => {
