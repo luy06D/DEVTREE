@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createAccount, getUser, login, updateUser, uploadImage } from "./handlers";
+import { createAccount, getUser, getUserByHandle, login, updateUser, uploadImage } from "./handlers";
 import { body } from 'express-validator'
 import { handleInputErrors } from "./middleware/validation";
 import { authenticate } from "./middleware/auth";
@@ -55,6 +55,8 @@ router.patch('/user',
 
 /** UPLOAD IMAGEN - CLOUDINARY */
 router.post('/user/image', authenticate, uploadImage)
+
+router.get('/:handle', getUserByHandle)
 
 
 

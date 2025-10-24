@@ -5,6 +5,7 @@ import formidable from 'formidable'
 import cloudinary from '../config/cloudinary'
 import slug from 'slug'
 import { generateJWT } from '../utils/jwt'
+import { param } from 'express-validator'
 
 
 
@@ -128,10 +129,31 @@ export const uploadImage = async (req: Request, res: Response) => {
             })
         })
 
-
     } catch (err) {
         const error = new Error('Error al cargar la imagen')
         return res.status(500).json({ error: error.message })
 
+    }
+}
+
+
+// MOSTRAR DATOS DE USUARIOS CON ID_HANDLE
+export const getUserByHandle = async (req: Request, res: Response) => {
+    try {
+
+        const { handle } = req.params
+        const dataUser = await User.findOne({handle}).select('-_id -__v -email -password')
+
+        if(!dataUser){
+            const error = new Error("El handle no existe")
+            return res.status(404).json({error: error.message})
+        }
+        res.json(dataUser)
+        
+    } catch (err) {
+        const error = new Error('Error al traer datos')
+        return res.status(500).json({error: error.message})
+
+        
     }
 }
