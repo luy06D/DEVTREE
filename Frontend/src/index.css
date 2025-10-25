@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+@theme {
+  /* Sobrescribe la fuente por defecto (sans) de Tailwind */
+  --font-sans: "Roboto", sans-serif;
+  
+  /* Opcional: puedes incluir las fuentes que cargaste como fallback */
+  /* --font-sans: "Playwrite DE Grund", 'Poppins', 'Inter', cursive; */
+}

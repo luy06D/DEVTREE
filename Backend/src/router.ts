@@ -56,6 +56,7 @@ router.patch('/user',
 /** UPLOAD IMAGEN - CLOUDINARY */
 router.post('/user/image', authenticate, uploadImage)
 
+/** DATA - VISTA PREVIA DE USUARIO */
 router.get('/:handle', getUserByHandle)
 
 

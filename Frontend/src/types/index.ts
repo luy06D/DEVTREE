@@ -9,6 +9,9 @@ export type User = {
     links : string
 }
 
+// TYPES GET-USERBYHANDLE
+export type UserHandle = Pick<User, 'descripcion' | 'handle' | 'image'| 'name' | 'links'>
+
 // HEREDAN DE USER 
 export type RegisterForm = Pick<User, 'handle' | 'email' | 'name'> & {
     password: string
