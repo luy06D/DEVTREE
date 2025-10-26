@@ -6,11 +6,17 @@ export default function HomeNavigation() {
         <>
 
         <Link
-        className="bg-lime-500 p-2 text-slate-800 uppercase font-black text-xs rounded-lg cursor-pointer"
+        className="bg-lime-500 p-2 text-slate-800  uppercase font-black text-xs rounded-lg cursor-pointer"
         to={'/auth/login'} 
         >Iniciar Sesión</Link>
 
+        <Link
+        className="bg-lime-500 p-2 text-slate-800  uppercase font-black text-xs rounded-lg cursor-pointer"
+        to={'/auth/register'} 
+        >Registrate</Link>
+
         </>
+        
 
     )
 }
