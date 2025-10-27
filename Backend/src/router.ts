@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createAccount, getUser, getUserByHandle, login, updateUser, uploadImage } from "./handlers";
+import { createAccount, getUser, getUserByHandle, login, searchHandle, updateUser, uploadImage } from "./handlers";
 import { body } from 'express-validator'
 import { handleInputErrors } from "./middleware/validation";
 import { authenticate } from "./middleware/auth";
@@ -46,9 +46,6 @@ router.patch('/user',
     body('handle')
         .notEmpty()
         .withMessage('El handle no puede ir vacio'),
-    body('descripcion')
-        .notEmpty()
-        .withMessage('La descripcion no puede ir vacia'),
     handleInputErrors,
     authenticate,
     updateUser);
@@ -59,8 +56,13 @@ router.post('/user/image', authenticate, uploadImage)
 /** DATA - VISTA PREVIA DE USUARIO */
 router.get('/:handle', getUserByHandle)
 
-
-
+/** BUSCA SI EL HANLDE YA EXISTE */
+router.post('/search',
+     body('handle')
+        .notEmpty()
+        .withMessage('El handle no puede ir vacio'),
+    handleInputErrors,
+    searchHandle)
 
 
 export default router;

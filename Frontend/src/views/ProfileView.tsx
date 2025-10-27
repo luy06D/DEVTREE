@@ -52,7 +52,6 @@ export default function ProfileView() {
         },
 
         onSuccess: (data) => {
-            console.log(data)
             queryClient.setQueryData(['user'], (prevData : User) =>{
                     console.log(prevData)
                 return{

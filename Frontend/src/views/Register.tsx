@@ -5,14 +5,18 @@ import ErrorMessage from "../components/ErrorMessage"
 import { isAxiosError} from "axios"
 import {toast} from 'sonner'
 import api from "../config/axios"
+import { useLocation } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 export default function Register() {
 
+  const navigate = useNavigate()
+  const location = useLocation()
   // Objeto - valores iniciales 
   const initialValues: RegisterForm = {
     name : '',
     email: '',
-    handle: '',
+    handle: location?.state?.handle || '',
     password: '',
     password_confirmation : ''
 
@@ -27,6 +31,7 @@ export default function Register() {
       const {data} = await api.post(`/auth/register`, formData)
       toast.success(data)
       reset() // Limpia el formulario
+      navigate('/auth/login')
 
     } catch (error) {
       if(isAxiosError(error) && error.response ){

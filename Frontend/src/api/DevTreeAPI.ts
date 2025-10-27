@@ -1,9 +1,9 @@
 // TODAS LAS QUERY DE LA VENTANA PRNCIPAL DEL DEV TREE
 
 // AXIOS LIBRERIA DE JS PARA REALIZAR PETICIONES HTTP
-import { isAxiosError } from "axios"; 
+import { isAxiosError } from "axios";
 import api from "../config/axios";
-import type {  User, UserHandle } from '../types'
+import type { User, UserHandle } from '../types'
 
 export async function getUser() {
     try {
@@ -36,25 +36,38 @@ export async function uploadImage(files: File) {
     formData.append('file', files)
     try {
 
-        const {data} = await api.post('/user/image', formData)
+        const { data } = await api.post('/user/image', formData)
         return data
-        
+
     } catch (error) {
-        if(isAxiosError(error) && error.response){
+        if (isAxiosError(error) && error.response) {
             throw new Error(error.response.data.error)
         }
     }
-    
+
 }
 
-export async function getUserByHandle(handle: string){
+export async function getUserByHandle(handle: string) {
     try {
 
-        const {data} = await api<UserHandle>(`/${handle}`)
+        const { data } = await api<UserHandle>(`/${handle}`)
+        return data
+
+    } catch (error) {
+        if (isAxiosError(error) && error.response) {
+            throw new Error(error.response.data.error)
+        }
+    }
+}
+
+export async function searchHandle(handle: string) {
+    try {
+
+        const {data} = await api.post<string>('/search', {handle})
         return data
         
     } catch (error) {
-        if(isAxiosError(error) && error.response){
+        if (isAxiosError(error) && error.response) {
             throw new Error(error.response.data.error)
         }
     }
